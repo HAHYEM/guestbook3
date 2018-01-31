@@ -45,9 +45,11 @@ public class GuestbookController {
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
 	public String delete(@ModelAttribute GuestbookVo guestbookVo, @RequestParam("no") int no) {
 		System.out.println("delete");
-		
+		GuestbookVo gvo = guestbookDao.select(guestbookVo.getNo());
+		System.out.println(gvo.toString());
+			
 		System.out.println(guestbookVo.toString());
-		if(guestbookVo.getPassword().equals("password")) {
+		if(guestbookVo.getPassword().equals(gvo.getPassword())) {
 			guestbookDao.delete(no);
 		}	
 			System.out.println("다시 입력하삼");
